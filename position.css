@@ -1,0 +1,28 @@
+p{
+    position:static;
+}
+.divi{
+    height: 2000px;
+    width: 80vw;
+    background-color: darkcyan;
+}
+.box{
+   
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background-color: brown;
+    border: 1px solid black;
+}
+#box3{
+    position: relative;
+    top:100px;
+}
+#box1{
+    position:fixed;
+    bottom:100px;
+}
+#box2{
+    position: absolute;
+   right:40px;
+}

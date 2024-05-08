@@ -1,0 +1,48 @@
+.box{
+    border: 1px solid black;
+    width:150px;
+    height:200px;
+    background-image: linear-gradient(to left,green,red);
+    /*background-image: linear-gradient(green,red)
+     background-image: linear-gradient(to right,green,red);
+    background-image: linear-gradient(to bottom right,green,red); -- diagonal
+    background-image: linear-gradient(to bottom left,green,red);
+    background-image: linear-gradient(33deg ,green,red,pink);
+    background-image: linear-gradient(to bottom,rgba(23,7,5,0.3),rgba(123,45,0,0.9));-using transparency*/
+    background-image: linear-gradient(orange,white,green);
+}
+.joker{
+    border: 1px solid black;
+    width:150px;
+    height:200px;
+    margin:10px;
+    background-image:radial-gradient(pink,blue);
+    background-image:radial-gradient(circle,pink,blue,black);
+    background-image:radial-gradient(circle,pink 40%,blue 20%,black 60%);
+}
+.fox{
+  border: 1px solid black;
+  width: 150px;
+  height: 200px;
+  background-image: conic-gradient(from 34deg ,blue,red);  
+}
+h1{
+    text-shadow: 3px 2px 4px red; /*(hor,ver,blur,color)*/
+    text-shadow: 3px 2px 4px red , 3px 5px 7px green; /*we can add multiple shadow to the text*/
+}
+.don{
+    width:100px;
+    height:120px;
+    background-color:aqua;
+    box-shadow: 4px 5px 5px blue,4px 9px 10px green;
+    box-shadow: -4px -5px 5px blue,4px 9px 10px green;
+}
+.gun{
+    max-height:100px;  /* here if we write more than 100px height capability , words will overflow the box so we 
+    need to an property*/
+    overflow: scroll;/*now if words are more than capability it start scrolling*/
+    /* In case of min-height/width , if content is bigger box will accomodate itself according to content size
+    Overflow:visible/hidden/scroll/auto*/
+    border:2px solid black;
+
+}

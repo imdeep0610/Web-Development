@@ -1,0 +1,21 @@
+div{
+    width: 100px;
+    height: 150px;
+    background-color: burlywood;
+    border: 2px solid black;
+}
+.translated{
+    transform: perspective(10px) translateZ(-10px);
+}
+.scaled{
+    /* here its zooming so if we want to see the effect we need to  adjust the element in such way that we can
+    see effect from back side */
+    margin-left: 100px;
+    transform: perspective(350px) scaleZ(4) rotateX(35deg) rotateY(30deg);
+}
+.rotate{
+    transform: rotateZ(78deg);
+}
+/* .static{
+    transform: perspective(100px) static(200px);
+} */

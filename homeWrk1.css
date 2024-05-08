@@ -1,0 +1,20 @@
+.container{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+#gun2{
+    position: absolute;
+   left: 0;
+   bottom: 0;
+}
+#gun3{
+    position: absolute;
+   right: 0;
+   top: 0;
+}
+#gun4{
+    position: absolute;
+   right: 0;
+    bottom: 0;
+}

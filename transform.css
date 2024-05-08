@@ -1,0 +1,10 @@
+#don{
+    background-color: brown;
+    /* transform: translate(100px,300px);
+              /* translateX(100px) -> moves in horizontally only left-ryt , if -100px ryt-left
+              translateY(100px) -> moves in vertically only   top-bottom ,if -100px bottom-top */ 
+   /* transform: rotate(23deg);   
+    transform: scale(2,3);  /* zooming in X & Y axis*/
+    /*transform: skew(34deg);    */
+   transform: matrix(2,3,4,5);
+}

@@ -1,0 +1,46 @@
+.container{
+    height: 400px;
+    border: 2px solid green;
+    display: flex; /* here when we do it all items inside the box will align on main axis by default */
+    flex-direction: row; /*here we change the default direction of flex items inside
+    flex-direction: row;--by default value
+    flex-direction: column-reverse;
+    flex-direction: row-reverse;*/
+    flex-wrap: wrap;/*it will make items goes downward asap the space is not sufficient to maintain the
+    width of the items*/
+    /*flex-wrap: nowrap; here items will start reducing the width of items asap the space is not sufficient */
+   /* flex-wrap: wrap-reverse;it will make items goes upward asap the space is not sufficient to maintain the
+    width of the items*/
+    justify-content: flex-start;
+    justify-content: flex-end;
+    justify-content: space-around;
+    justify-content: space-between;
+    justify-content: space-evenly;
+
+    align-items: flex-start;
+    align-items: flex-end;
+    align-items: center;
+    align-items: stretch;
+    align-items: baseline; /* its effect will be better visible when text inside the flex items are not in same size*/
+    gap: 1.5px; 
+    row-gap: 1.2px;
+    column-gap: 3px;
+}
+.box{
+    border: 1px solid brown;
+}
+.container1{
+    height: 400px;
+    border: 2px solid red;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+   align-items: baseline;
+   align-content: center;
+ 
+}
+.box1{
+    border: 1px solid burlywood;
+    background-color: aqua;
+}

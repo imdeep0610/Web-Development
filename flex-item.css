@@ -1,0 +1,39 @@
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing:border-box; /* in this case border width will adjust in width of the box only no extra 
+                            space is given for border*/
+                          
+}
+.container{
+    width:400px;
+    height: 300px;
+    border: 1px solid green;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 3px;
+}
+.box{
+    border: 1px solid aqua;
+    background-color: brown;
+}
+#box1{
+    order: 1;
+    flex-grow: 3; /* when container space has extra space left then box1 will take the left space
+}
+#box3{
+    order: 1; /* here both box1 and 3 have same order so then box which is ahead in starting will go ahead*/
+}
+#box2{
+    order: 3;
+    flex-shrink: 2; /*when all boxes squeeze due to less width , box2 will shrink 2 times faster than other boxes*/
+}
+#box4{
+    order: 2;
+    flex-basis: 100px;
+    flex-basis: 10%;
+}

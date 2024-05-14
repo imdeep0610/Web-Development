@@ -1,149 +1,204 @@
-const URL="https://api.github.com/users/";
-const searchBtn=document.querySelector(".search-btn");
-const searchBar=document.querySelector(".search-container");
-const root = document.documentElement.style;
-const get = (para) => document.getElementById(`${para}`);
-const profilecontainer = document.querySelector(".profile-container");
-const input=document.getElementById("input");
-const noResult=document.getElementById("no-results");
-const modeBtn=document.getElementById("btn-mode");
-const modeTxt=document.getElementById("mode-txt");
-const modeIcon=document.getElementById("icon");
-const image=document.getElementById("avatar");
-const username=document.getElementById("username");
-const user=document.getElementById("user");
-const date=document.getElementById("date");
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const bio=document.getElementById("bio");
-const repo=document.getElementById("repos");
-const followers=document.getElementById("followers");
-const following=document.getElementById("following");
-const location=document.getElementById("location");
-const page=document.getElementById("page");
-const twitter=document.getElementById("twitter");
-const company=document.getElementById("company");
-let darkMode=false;
+const inputSlider=document.querySelector("#lengthSlider");
+const lengthDisplay=document.querySelector("#lengthNumber");
+const displayPassword=document.querySelector("#passwordDisplay");
+const cpyBtn=document.querySelector(".copy-btn");
+const cpyMsg=document.querySelector("#copyMsg");
+const uppercaseCheck=document.querySelector("#uppercase");
+const lowercaseCheck=document.querySelector("#lowercase");
+const numbersCheck=document.querySelector("#numbers");
+const symbolCheck=document.querySelector("#symbols");
+const indicator=document.querySelector(".indicator");
+const generateBtn=document.querySelector(".generateBtn");
+const allCheckBox=document.querySelectorAll("input[type=checkbox]");
+const symbol='!@$%^&*+(){}/?\[][}=(}-#'
 
- function getUserData(getURL){
-    // try{
-    // const response=await fetch(URL);
-    // const data=await response.json();
+let password="";
+let passwordLength=10;
+let checkCount=0;
+handleSlider();
+setIndicator("#ccc");
 
-    // updateData(data);
-    // }
-    // catch(err){
-
-    // }
-
-    fetch(getURL)
-    .then((response)=>response.json)
-    .then((data)=>{
-        console.log(data);
-        updateData(data);
-    })
-    .catch((error)=>{
-        throw error;
-    })
+//set the password length
+function handleSlider(){
+    inputSlider.value = passwordLength;
+    lengthDisplay.innerText = passwordLength;
+    const min = inputSlider.min;
+    const max = inputSlider.max;
+    inputSlider.style.backgroundSize = ( (passwordLength - min)*100/(max - min)) + "% 100%"
 }
 
-function updateData(data){
-      if(data.message!=='Not Found'){
-          noResult.style.dispaly="none";
-          function checkNull(para1,para2){
-               if(para1==="" || para1===null){
-                  para2.style.opacity=0.5;
-                  para2.previousElementSibling.style.opacity = 0.5;
-                  return false;
-               }
-               else{
-               return true;
-               }
-          }
-      
+function setIndicator(color) {
+  indicator.style.backgroundColor = color;
+  indicator.style.boxShadow = `0px 0px 12px 1px ${color}`;
+}
 
-      image.src=`${data.avatar_url}`;
-      username.innerText=data.name === null ? data.login : data.name;
-      user.innerText=`${data.login}`;
-      user.href=`${data.html_url}`
-      datesegments = data.created_at.split("T").shift().split("-");
-      date.innerText=`Joined ${datesegments[2]} ${months[datesegments[1] - 1]} ${datesegments[0]}`;
-      bio.innerText=data.bio==null ? "This profile has no bio" : `${data.bio}`;
-      repo.innerText=`${data.public_repos}`;
-      followers.innerText=`${data.followers}`;
-      following.innerText = `${data.following}`;
-      location.innerText= checkNull(data.location,location) ? data.location : 'Not available';
-      page.innerText=checkNull(data.blog,page) ? data.blog : 'Not available';
-      page.href=checkNull(data.blog, page) ? data.blog : "#";
-      twitter.innerText=checkNull(data.twitter_username,twitter) ? data.twitter_username : 'Not available';
-      twitter.href=checkNull(data.twitter_username, twitter) ? `https://twitter.com/${data.twitter_username}` : "#";
-      company.innerText=checkNull(data.company,company) ? data.company : 'Not available';
-      searchBar.classList.toggle("active"); 
-      profilecontainer.classList.toggle("active");
+function getRndInteger(min,max){
+   return Math.floor(Math.random()*(max-min))+min;
+}
+
+function generateRandomNumber(){
+    return getRndInteger(0,9);
+}
+
+function generateLowerCase(){
+//97-a 123-z it gives randon no between 93-123 then String.fromCharCode() changes it into char
+    return String.fromCharCode(getRndInteger(97,123));
+}
+
+function generateUpperCase(){
+    //67-A 91-Z it gives randon no between 93-123 then String.fromCharCode() changes it into char
+        return String.fromCharCode(getRndInteger(67,91));
+}
+
+function generateSymbol(){
+    const randNum=getRndInteger(0,symbol.length);
+    return symbol.charAt(randNum);
+}
+
+function calcStrength(){
+    let hasUpper = false;
+    let hasLower = false;
+    let hasNum = false;
+    let hasSym = false;
+    if (uppercaseCheck.checked) hasUpper = true;
+    if (lowercaseCheck.checked) hasLower = true;
+    if (numbersCheck.checked) hasNum = true;
+    if (symbolCheck.checked) hasSym = true;
+  
+    if (hasUpper && hasLower && (hasNum || hasSym) && passwordLength >= 8) {
+      setIndicator("#0f0");
+    } else if (
+      (hasLower || hasUpper) &&
+      (hasNum || hasSym) &&
+      passwordLength >= 6
+    ) {
+      setIndicator("#ff0");
     } else {
-      noResult.style.display = "block";
+      setIndicator("#f00");
     }
-        }
-
-
-
-searchBtn.addEventListener('click',function(){
-    if(input.value!=""){  //whenever we put some input API call will be done thro the given function
-       getUserData(URL+input.value);
-    }
-});
-
-input.addEventListener('input',function(){
-    noResult.style.display="none";  //when in input field there is some text and we add some more then "no results"
-                                     //will be hidden
-});
-
-input.addEventListener('keydown',function(e){
-    if(e.key=='Enter'){  //here keydown is an even when we press any key and here we say that the key must be Enter
-        if(input.value!=""){  //so when there is input in the field and we press Enter key 
-         getUserData(URL+input.value);  //API call will happen
-         console.log(URL+input.value);
-        }
-    }
-});
-
-modeBtn.addEventListener('click',function(){
-    if(darkMode){
-       lightModeProp(); 
-    }
-    else{
-        darkModeProp();
-    }
-});
-
-
-function darkModeProp(){
-    root.setProperty("--lm-bg", "#141D2F");
-    root.setProperty("--lm-bg-content", "#1E2A47");
-    root.setProperty("--lm-text", "white");
-    root.setProperty("--lm-text-alt", "white");
-    root.setProperty("--lm-shadow-xl", "rgba(70,88,109,0.15)");
-    modeTxt.innerText = "LIGHT";
-    modeIcon.src = "./assets/images/sun-icon.svg";
-    root.setProperty("--lm-icon-bg", "brightness(1000%)");
-    darkMode = true;
-    localStorage.setItem("dark-mode", true)
-}
-function lightModeProp(){
-    root.setProperty("--lm-bg", "#F6F8FF");
-  root.setProperty("--lm-bg-content", "#FEFEFE");
-  root.setProperty("--lm-text", "#4B6A9B");
-  root.setProperty("--lm-text-alt", "#2B3442");
-  root.setProperty("--lm-shadow-xl", "rgba(70, 88, 109, 0.25)");
-  modeTxt.innerText = "DARK";
-  modeIcon.src = "./assets/images/moon-icon.svg";
-  root.setProperty("--lm-icon-bg", "brightness(100%)");
-  darkMode = false;
-  localStorage.setItem("dark-mode", false);
 }
 
-function init(){
-     darkMode=false;
-     getUserData(url+"thepranaygupta");
+async function copyContent(){
+  try{
+    //writeText return us a promise and thats why we use await so that when
+    // promise(to copy the password) is comlpete, "copied" message is shown on screen
+       await navigator.clipboard.writeText(displayPassword.value);
+       cpyMsg.innerText='copied';
+  }
+  catch(e){
+         cpyMsg.innerText='failed'
+  }
+
+  //to make cpy wala span visible
+  cpyMsg.classList.add("active");
+  setTimeout(()=>{
+    cpyMsg.classList.remove("active");
+  },2000);
 }
-init();
+
+inputSlider.addEventListener('input',(e)=>{
+    passwordLength=e.target.value;
+    handleSlider();
+});
+cpyBtn.addEventListener('click',()=>{
+   if(passwordDisplay.value){
+   copyContent();
+   }
+});
+
+allCheckBox.forEach( (checkbox) => {
+    checkbox.addEventListener('change', handleCheckBoxChange);
+})
+
+
+function handleCheckBoxChange() {
+  checkCount = 0;
+  allCheckBox.forEach( (checkbox) => {
+      if(checkbox.checked)
+          checkCount++;
+  });
+
+  //special condition
+  if(passwordLength < checkCount ) {
+      passwordLength = checkCount;
+      handleSlider();
+  }
+}
+
+generateBtn.addEventListener('click',()=>{
+   //none of the checkbox is selected
+   if(checkCount<=0){
+    return;
+   }
+   if(passwordLength<checkCount){
+    passwordLength=checkCount;
+    handleSlider();
+}
+console.log("start the journey");
+   //new password
+   //remove old pass
+   password="";
+
+   //put the stuff mentioned by checkbox
+//    if(uppercaseCheck.checked){
+//        password+=generateUpperCase();
+//    }
+//    if(lowercaseCheck.checked){
+//     password+=generateLowerCase();
+//    }
+//    if(numbersCheck.checked){
+//     password+=generateRandomNumber();
+// }
+// if(symbolCheck.checked){
+//   password+=generateSymbol();
+// }
+
+let funArr=[];
+if(uppercaseCheck.checked){
+    funArr.push(generateUpperCase);
+}
+if(lowercaseCheck.checked){
+  funArr.push(generateLowerCase);
+}
+if(numbersCheck.checked){
+  funArr.push(generateRandomNumber);
+}
+if(uppercaseCheck.checked){
+  funArr.push(generateSymbol);
+}
+
+//compulsary addition 
+ for(let i=0;i<funArr.length.length;i++){
+    password+=funArr[i]();
+ }
+
+ //remaining addition
+ for(let i=0;i<passwordLength-funArr.length;i++){
+  let randIndex = getRndInteger(0 , funArr.length);
+  console.log("randIndex" + randIndex);
+  password += funArr[randIndex]();
+ }
+
+ //shuffle the password to get random pass
+ password=shufflePassword(Array.from(password));
+
+ //show in UI
+ passwordDisplay.value=password;
+
+ //strength
+calcStrength();
+});
+
+function shufflePassword(array){
+    //Fisher Yates Method
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+  let str = "";
+  array.forEach((el) => (str += el));
+  return str;
+}
 

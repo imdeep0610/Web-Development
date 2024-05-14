@@ -1,404 +1,226 @@
-:root {
-    --lm-bg: #f6f8ff;
-    --lm-bg-content: #fefefe;
-    --lm-text: #4b6a9b;
-    --lm-text-alt: #2b3442;
-    --lm-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.2);
-    --lm-shadow-inactive: 0px 16px 30px -10px rgba(0, 0, 0, 0.2);
-    --lm-icon-bg: brightness(100%);
-    /* Btn */
-    --btn: #0079ff;
-    --btn-hover: #60abff;
-  }
-
-  * {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Space Mono", monospace;
-  }
+    font-family: 'League Spartan', sans-serif;
+}
+
+:root {
+
+    --dk-violet: hsl(268, 75%, 9%);
+    --lt-violet: hsl(268, 47%, 21%);
+    --lt-violet2: hsl(281, 89%, 26%);
+    --vb-violet: hsl(285, 91%, 52%);
+    --vb-violet2: hsl(290, 70%, 36%);
   
-  body {
-    background-color: var(--lm-bg);
-    font-size: 13px;
-    color: var(--lm-text);
-    width: 100%;
-    position: relative;
+    --vb-yellow: hsl(52, 100%, 62%);
+  
+  
+    --pl-white: hsl(0, 0%, 100%);
+  
+    --vb-cyan: hsl(176, 100%, 44%);
+    --vb-cyan2: hsl(177, 92%, 70%);
+    --dk-text: hsl(198, 20%, 13%);
+}
+.wrapper{
+    width: 100vw;
     height: 100vh;
-  }
-  
-  .wrapper {
-    width: 327px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(231deg, rgba(22, 6, 40, 1) 0%, rgba(52, 28, 79, 1) 50%, rgba(88, 7, 125, 1) 100%);
+}
+.container{
+    width: 90%;
+    max-width: 450px;
+}
+h1{
+    color:var(--pl-white);
+    opacity:0.75;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    line-height: 1.2;
+}
+.display-container{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--dk-violet);
+    border-radius: 1rem;
+    border-bottom: 0.35rem solid var(--lt-violet2);
+    margin: 1rem 0;
+    padding-top: 0.35rem;
+}
+.display{
+    width: 100%;
+    background-color: transparent;
+    color: var(--vb-yellow);
+    padding: 1.15rem 1rem;
+    font-weight: 600;
+    font-size:1.5rem;
+    line-height: 30px;
+    letter-spacing: 1px;
+    padding-right: 3.25rem;
+    border: none;
+}
+.display::placeholder{
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    gap: 36px;
-  }
-  
-  #app {
+    left: 1.5rem;
+    font-size: 1.5rem;
+    line-height: 30px;
+    color: var(--vb-yellow);
+    opacity: 0.65;
+    text-transform: uppercase;
+    transform: translateY(-50%);
+}
+.display-container button{
+    position:absolute;
+    top: 50%;
+    right: 1.5rem;
+    transform: translateY(-50%);
+}
+.input-container{
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  #btn-mode {
+    background-color: var(--dk-violet);
+    border-radius: 1rem;
+    border-bottom: 0.35rem solid var(--lt-violet2);
+    padding: 2rem;
+}
+.length-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90px;
-    letter-spacing: 2.5px;
-    color: var(--lm-text);
-    font-weight: bold;
-  }
-  
-  #btn-mode:hover {
-    cursor: pointer;
-  }
-  
-  .searchbar-container {
-    position: relative;
-    background-color: var(--lm-bg-content);
-    border-radius: 15px;
-    box-shadow: var(--lm-shadow);
+}
+.length-container p:nth-child(1){  /*just a way to fetch*/
+    font-size: 1.5rem;
+    color: var(--pl-white);
+}
+.length-container p:nth-child(2){  
+    font-size: 1.5rem;
+    color: var(--vb-yellow);
+}
+.strength-container{
     display: flex;
-    height: 100%;
-    padding: 6px;
     justify-content: space-between;
     align-items: center;
-    background-image: url(./assets/images/search-icon.svg);
-    background-repeat: no-repeat;
-    background-position-x: 24px;
-    background-position-y: center;
-    background-size: 20px;
-  }
-  
-  #input {
-    border: none;
-    width: 80%;
-    outline: none;
-    background: none;
-    color: var(--lm-text);
-    padding-left: 50px;
-  }
-  
-  #input::placeholder {
-    color: var(--lm-text);
-    letter-spacing: -0.5px;
-    font-size: 13px;
-  }
-  
-  .searchbar-container img {
-    height: 20px;
-    width: 20px;
-    padding: 0 10px 0px 16px;
-  }
-  
-  .btn-search {
-    min-width: 84px;
-    padding: 12px 16px;
-    background-color: var(--btn);
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  
-  .btn-search:hover {
-    cursor: pointer;
-    background-color: var(--btn-hover);
-  }
-  
-  .btn-search:active {
-    transform: scale(0.975);
-  }
-  
-  .profile-container {
-    background-color: var(--lm-bg-content);
-    border-radius: 15px;
-    box-shadow: var(--lm-shadow);
-    padding: 24px;
-  }
-  
-  .profile-content {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    justify-content: space-evenly;
-  }
-  
-  .profile-header {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 10px;
-  }
-  
-  #avatar {
-    width: 70px;
-    border-radius: 90px;
-  }
-  
-  .profile-name {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .profile-name h2 {
-    font-size: 16px;
-    font-weight: bold;
-    color: var(--lm-text-alt);
-  }
-  
-  #user {
-    color: var(--btn);
-  }
-  
-  .profile-info-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  #bio {
-    line-height: 25px;
-    opacity: 0.75;
-  }
-  
-  .profile-stats-wrapper {
-    display: flex;
-    justify-content: space-between;
-    background-color: var(--lm-bg);
+    margin-top: 1.75rem;
+    margin-bottom: 2rem;
+}
+.strength-container p{
+    font-size: 1.5rem;
+    color: var(--pl-white);
+}
+.indicator{
+    width:1.5rem ;
+    height:1.5rem ;
+    border-radius: 50%;
+}
+.generateBtn{
+    width: 100%;
+    padding: 1rem 0;
+    background-color: var(--vb-violet);
     text-align: center;
-    border-radius: 10px;
-    padding: 18px;
-  }
-  
-  .profile-stat {
+    border-radius: 0.75rem;
+    border-bottom: 0.35rem solid var(--vb-yellow);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--vb-yellow);
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+.check{
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 8px;
-  }
-  
-  .stat-title {
-    font-size: 11px;
-  }
-  
-  .stat-value {
-    font-size: 16px;
-    font-weight: bold;
-    color: var(--lm-text-alt);
-  }
-  
-  .profile-bottom-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 16px 0;
-  }
-  
-  .profile-info {
-    width: 50%;
-    display: flex;
-    gap: 14px;
-    justify-content: center;
     align-items: center;
-  }
-  
-  .bottom-icons {
-    width: 20px;
-    filter: var(--lm-icon-bg);
-  }
-  
-  .profile-info p {
-    overflow-wrap: break-word;
-  }
-  
-  .profile-info a {
-    color: var(--lm-text);
-    word-break: break-all;
-  }
-  
-  .error {
+    margin: 1rem 0;
+    gap: 0 1rem; /* x&y axis*/
+}
+.check input{
+ appearance: none; /* default styling of browser is off*/
+ width: 20px;
+ height: 20px;
+ border: 1px solid var(--vb-cyan);
+ cursor: pointer;
+ position: relative;
+ border-radius: 0.35rem;
+}
+.check input:checked{
+    background-color: var(--vb-cyan);
+}
+.check input:checked::before{
+    content: '✔';
     position: absolute;
-    color: red;
-    font-weight: bold;
-    right: 10px;
-    top: -25px;
-  }
-  
-  .dm-text {
-    color: var(--dm-text);
-  }
-  
-  .dm-bg {
-    background-color: var(--dm-bg);
-  }
-  
-  .dm-bg-sec {
-    background-color: var(--dm-bg-content);
-  }
-  
-  .active {
-    box-shadow: var(--lm-shadow);
-  }
-  
-  /* tablet */
-  @media screen and (min-width: 768px) {
-    .container {
-      width: 573px;
-    }
-  
-    .searchbar-container {
-      padding: 10px;
-    }
-  
-    #input {
-      font-size: 18px;
-      width: 75%;
-    }
-  
-    #input::placeholder {
-      font-size: 18px;
-    }
-  
-    .btn-search {
-      padding: 14px 28px;
-      font-size: 16px;
-    }
-  
-    #app {
-      gap: 24px;
-    }
-  
-    .profile-container {
-      padding: 40px;
-    }
-  
-    .profile-header {
-      margin-bottom: 0;
-    }
-  
-    #avatar {
-      width: 117px;
-    }
-  
-    .profile-content {
-      gap: 30px;
-    }
-  
-    .profile-info-wrapper {
-      justify-content: center;
-    }
-  
-    .profile-name h2 {
-      font-size: 26px;
-    }
-  
-    #user {
-      font-size: 16px;
-    }
-  
-    #date {
-      font-size: 15px;
-    }
-  
-    #bio {
-      font-size: 15px;
-    }
-  
-    .error {
-      font-size: 15px;
-      top: -30px;
-    }
-  
-    .profile-stats-wrapper {
-      padding: 18px 32px;
-    }
-  
-    .profile-stat {
-      text-align: start;
-    }
-  
-    .stat-title {
-      font-size: 13px;
-    }
-  
-    .stat-value {
-      font-size: 22px;
-    }
-  
-    .profile-bottom-wrapper {
-      flex-wrap: wrap;
-      flex-direction: row;
-    }
-  
-    .profile-info {
-      width: 47.5%;
-      font-size: 15px;
-    }
-  }
-  
-  /* Desktop */
-  @media screen and (min-width: 1280px) {
-    .container {
-      width: 730px;
-    }
-  
-    .profile-container {
-      position: relative;
-    }
-  
-    .profile-content {
-      width: 480px;
-      margin-left: auto;
-      gap: 16px;
-    }
-  
-    #avatar {
-      position: absolute;
-      left: 0;
-      margin-left: 40px;
-    }
-  
-    .profile-info-wrapper {
-      flex-direction: row;
-      justify-content: space-between;
-      width: 100%;
-    }
-  
-    .profile-name {
-      gap: 2px;
-    }
-  
-    #date {
-      padding-top: 10px;
-    }
-  
-    .profile-stats-wrapper {
-      margin: 20px 0;
-    }
-  
-    .error {
-      top: 50%;
-      right: 20%;
-      transform: translateY(-50%);
-      font-size: 15px;
-    }
-  
-    #input {
-      width: 65%;
-    }
-  }
-  
+    color: var(--dk-text);
+    font-weight:600;
+    font-size: 1.05rem;
+    left: 50%;
+    top: -3.5px;
+    transform: translateX(-50%)  translateY(10%);
+}
+.check label{
+    color: var(--pl-white);
+    font-size: 1.25rem;
+    letter-spacing: 0.75px;
+}
+.slider{
+    appearance: none;
+    width: 100%;
+    height: 0.75rem;
+    cursor: pointer;
+    background-color: var(--lt-violet);
+    border-radius: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    background-image: linear-gradient(var(--vb-violet), var(--vb-violet));
+    background-repeat: no-repeat;
+    border: none;
+    outline: none;
+}
+.slider::-webkit-slider-thumb{ /*-webkit-slider-thumb -> its an pseudo element selector thro which we can access 
+ thumb of the slider(that ball)*/
+        position: relative;
+        appearance: none;
+        height: 2rem;
+        width: 2rem;
+        border-radius: 50%;
+        background-color: var(--vb-yellow);
+        cursor: pointer;
+        margin-top: 3px;
+        box-shadow: 0px 0px 20px 0px rgba(255, 229, 61, 0.50);
+}
+.slider:focus{
+    outline: 3px solid var(--vb-yellow);
+}
+.slider::-webkit-slider-thumb:hover{
+    outline: 2px solid var(--vb-yellow);
+    background-color: var(--dk-violet);
+    box-shadow: 0px 0px 25px 5px rgba(255, 229, 61, 0.80);
+}
+.copy-btn{
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+.toolkit{
+    background-color:var(--vb-violet);
+    position: absolute;
+    color: var(--vb-yellow);
+    font-size: 1.25rem;
+    top: -35px;
+    left: -25px;
+    padding: 5px 10px;
+    border-radius: 1rem;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: bottom;
+    transition: all 250ms ease-in-out;
+}
+.toolkit.active{
+    opacity: 1;
+    transform: scale(1);
+}

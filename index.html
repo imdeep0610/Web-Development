@@ -4,90 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
-    <link rel="manifest" href="./assets/site.webmanifest">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <div class="wrapper">
-       <header class="head-container">
-        <h1 class="title">Dev Detective</h1>
-        <div id="btn-mode">
-        <button class="mode-txt">Dark</button>
-       <div class="icon-container">
-        <img src="./assets/images/moon-icon.svg" alt="" id="icon">
+    <div class="container">
+        <!--heading-->
+        <h1>Password Generator</h1>
+        <div class="display-container">
+            <!--readonly make the text inside it readable only-->
+            <!--Custom Attribute -> one more way to fetch element like id,tag 
+            data-passwordDisplay -> document.querySelector("passwordDisplay");-->
+            <input readonly placeholder="Password" class="display" id="passwordDisplay" data-passwordDisplay>
+            <button class="copy-btn">
+                <!--for copy msge-->
+                <span id="copyMsg" class="toolkit" data-copyMsg></span>
+                <!--for copy sign-->
+                <img src="./assets/copy.svg" alt="copy" width="23" height="23">
+            </button>
         </div>
-        </div>
-       </header>
-       <section>
-        <div id="app">
-            <div class="search-container">
-                <input type="search" id="input" placeholder="Enter a Github username..."/>
-                <div class="error">
-                    <p id="no-results">no search results</p>
-                </div>
-                <button class="search-btn">Search</button>
+        <div class="input-container">
+            <!--password length-->
+            <div class="length-container">
+                <p>Password Length</p>
+                <p data-lengthNumber id="lengthNumber">0</p>
             </div>
-        </div>
-
-        <div class="profile-container">
-            <div class="profile-content">
-                <div class="profile-header">
-                    <div class="image">
-                    <img src="" alt="" id="avatar">
-                </div>
-                    <div class="profile-info">
-                        <div class="profile-name">
-                            <h2 id="username"></h2>
-                            <a href="#" target="_blank" id="user">
-                        </div>
-                        <p id="date"></p>
-                    </div>
-                </div>
-                <p id="bio"></p>
-                <div class="profile-stat-wrapper">
-                    <div class="profile-stat">
-                        <p class="stat-title">Repos</p>
-                        <p class="stat-value" id="repos"></p>
-                    </div>
-                    <div class="profile-stat">
-                        <p class="stat-title">Followers</p>
-                        <p class="stat-value" id="followers"></p>
-                    </div>
-                    <div class="profile-stat">
-                        <p class="stat-title">Following</p>
-                        <p class="stat-value" id="following"></p>
-                    </div>
-                </div>
-                <div class="profile-bottom-wrapper">
-                    <div class="profile-info">
-                        <img src="./assets/images/location-icon.svg" alt="" class="bottom-icon">
-                        <p id="location"></p>
-                    </div>
-                    <div class="profile-info">
-                        <img src="./assets/images/website-icon.svg" alt="" class="bottom-icon">
-                        <a href="#" id="page"></a>
-                    </div>
-                    <div class="profile-info">
-                        <img src="./assets/images/twitter-icon.svg" alt="" class="bottom-icon">
-                        <a href="#" id="twitter"></a>
-                    </div>
-                    <div class="profile-info">
-                        <img src="./assets/images/company-icon.svg" alt="" class="bottom-icon">
-                        <p id="company"></p>
-                    </div>
-                </div>
+            <!--slider-->
+             <!--step-> shows hoe much step slider will take in 1 step-->   
+            <input type="range" min="1" max="20" step="1" id="lengthSlider" class="slider">
+            <!--checkboxes-->
+            <div class="check">
+                <input type="checkbox" id="uppercase">
+                <label for="uppercase">Includes uppercase letters</label>
             </div>
+            <div class="check">
+                <input type="checkbox" id="lowercase">
+                <label for="lowercase">Includes lowercase letters</label>
+            </div>
+            <div class="check">
+                <input type="checkbox" id="numbers">
+                <label for="numbers">Includes numbers</label>
+            </div>
+            <div class="check">
+            <input type="checkbox" id="symbols">
+            <label for="symbols">Includes symbols</label>
+           </div>
+        <!--strength section-->
+        <div class="strength-container">
+           <p>Strength</p>
+           <div class="indicator"></div>
         </div>
-       </section>
+        <!--generatePassword button-->
+         <button class="generateBtn" >Generate Password</button>
     </div>
+</div>
+</div>
     <script src="index.js"></script>
 </body>
 </html>

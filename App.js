@@ -1,48 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
-import { useEffect, useState } from 'react';
-
-function App() {
-
-//useState is used to render the changes on ui
-const[text,setText]=useState('');
-const[name,setName]=useState('Love');
-function changeHandler(event){
-  console.log(text);
-  setText(event.target.value);
-}
-
-//useEffect is used to manage side effect after every update on ui
-//variation1 - after every render
-// useEffect(()=>{
-//   console.log("Rendering done");
-// });
+import React, { useEffect } from "react";
+import  { useState } from "react";
+import Navbar from "./components/Navbar";
+import Filter from "./components/Filter";
+import Cards from "./components/Cards" ;
+import Spinner from "./components/Spinner";
+import {apiUrl,filterData} from './data.js';
+import {toast} from 'react-toastify';
 
 
-//variation2 - after 1st render only
-// useEffect(()=>{
-//   console.log("rendering done");
-// },[]); ->[] dependencies
+const App = () => {
+const[courses,setCourses]=useState(null);
+const[loading,setLoading] =useState(true); 
+const[category,setCategory]=useState(filterData[0].title);
+ 
+async function fetchData(){
+setLoading(true);
+  try{
+    let response=await fetch(apiUrl);
+    let output=await response.json();
+    setCourses(output.data);
+  }
+  catch(error){
+    toast.error("Something went wrong");
+  }
+  setLoading(false);
+ }
 
-//variation3 - first render + when dependencies changes
-// useEffect(()=>{
-//   console.log("change observed");
-// },[name]);
-
-//variation4-to handle unmounting of the component
-useEffect(()=>{
-  //add event listener
-  console.log("event added");
-return(()=>{
-  console.log("event removed"); //line37 executed frst before line 35
-});
-},[text]);
+ useEffect(()=>{
+  fetchData();
+ },[]);
 
   return (
-    <div className="app">
-  <input type="text" onChange={changeHandler}></input>
+  <div className="min-h-screen flex flex-col">
+    <div>
+   <Navbar/> 
+   </div>
+   <div className="bg-bgDark">
+   <div>
+   <Filter filterData={filterData}
+     category={category}
+     setCategory={setCategory}
+   />
+   </div>
+   <div className="w-11/12 max-w-[1200px] mx-auto flex flex-wrap justify-center items-center min-h-[50vh]">
+    {loading?<Spinner/>:<Cards courses={courses} category={category}/>}
+   </div>
+   </div>
   </div>
-  );
-}
+    );
+};
 
 export default App;

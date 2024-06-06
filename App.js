@@ -1,53 +1,19 @@
-import React, { useEffect } from "react";
-import  { useState } from "react";
-import Navbar from "./components/Navbar";
-import Filter from "./components/Filter";
-import Cards from "./components/Cards" ;
-import Spinner from "./components/Spinner";
-import {apiUrl,filterData} from './data.js';
-import {toast} from 'react-toastify';
-
+import React from "react";
+import Testimonials from './components/Testimonials';
+import reviews from "./data";
 
 const App = () => {
-const[courses,setCourses]=useState(null);
-const[loading,setLoading] =useState(true); 
-const[category,setCategory]=useState(filterData[0].title);
- 
-async function fetchData(){
-setLoading(true);
-  try{
-    let response=await fetch(apiUrl);
-    let output=await response.json();
-    setCourses(output.data);
-  }
-  catch(error){
-    toast.error("Something went wrong");
-  }
-  setLoading(false);
- }
-
- useEffect(()=>{
-  fetchData();
- },[]);
-
   return (
-  <div className="min-h-screen flex flex-col">
+  <div className="flex flex-col w-[100vw] h-[100vh] justify-center items-center bg-gray-200">
+    <div className="text-center">
+      <h1 className="text-4xl font-bold">Our Testimonials</h1>
+    </div>
+    <div className="bg-violet-400 h-[4px] w-1/5 mt-1 mx-auto"></div>
     <div>
-   <Navbar/> 
-   </div>
-   <div className="bg-bgDark">
-   <div>
-   <Filter filterData={filterData}
-     category={category}
-     setCategory={setCategory}
-   />
-   </div>
-   <div className="w-11/12 max-w-[1200px] mx-auto flex flex-wrap justify-center items-center min-h-[50vh]">
-    {loading?<Spinner/>:<Cards courses={courses} category={category}/>}
-   </div>
-   </div>
+      <Testimonials reviews={reviews}/>
+    </div>
   </div>
-    );
+  );
 };
 
 export default App;
